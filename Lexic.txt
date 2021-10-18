@@ -1,0 +1,97 @@
+1. Language Definition:
+
+	1.1. Alphabet:
+
+      a. Upper (A-Z) and lower case letters (a-z) of the English alphabet
+
+      b. Underline character '_';
+
+      c. Decimal digits (0-9);
+
+	1.2. Lexic:
+
+      a. Operators: + - / * = < <= > >= <> 
+	  
+	  b. Separators: ( ) [ ] { } newline space : ;
+	  
+	  c. Keywords: main var Integer Float Char Boolean read write if do else end for while and or xor
+	  
+	  d: Identifiers: 
+	  
+			identifier ::= starting_character { id_character }
+			
+			id_character ::= starting_character | digit
+			
+			starting_character ::= letter | "_"
+			
+			letter ::= "a" | "b" | ... | "z" | "A" | "B" | .. "Z"
+			
+			digit ::= "0" | "1" | ... | "9"
+	  
+	  e: Constants:
+			
+			integer ::= digit { digit }  //this language considers numbers starting with 0 valid
+			
+			double ::= digit { digit } [ "." digit { digit } ] 
+			
+			character ::= "'" (letter | digit) "'"
+			
+			string ::= '"' { character } '"'
+			
+			boolean ::= "True" | "False"
+
+	1.3. Syntax:
+	
+		program ::= { declaration } "main" { statement_list }
+		
+		statement_list ::= statement | statement line_separator statement_list
+		
+		declaration_list ::= declaration | declaration line_separator declaration_list
+		
+		line_separator ::= ";" | NEWLINE
+		
+		statement ::= simple_statement | structural_statement
+		
+		simple_statement ::= declaration | assignment | io_statement
+		
+		declaration ::= "var" IDENTIFIER ":" type [ array_part ]
+		
+		array_part ::= "[" integer "]"
+		
+		type ::= "Integer" | "Float" | "Char" | "Boolean"
+		
+		assignment ::= variable "<-" expression
+		
+		variable ::= IDENTIFIER [ array_part ]
+		
+		io_statement ::= read_statement | write_statement
+		
+		read_statement ::= "read" variable
+		
+		write_statement ::= "write" expression
+		
+		expression ::= expression math_operator1 term | term
+		
+		term ::= term math_operator2 factor | factor
+		
+		factor ::= IDENTIFIER | CONSTANT
+		
+		math_operator1 ::= "+" | "-" 
+		
+		math_operator2 ::=| "/" | "*"
+		
+		structural_statement ::= if_statement | for_statement | while_statement
+		
+		if_statement ::= "if" condition "do" statement_list { "else" "if" condition "do" statement_list } [ "else" "do" statement_list ] "end"
+		
+		for_statement ::= "for" IDENTIFIER "=" expression "," expression "," expression "do" statement_list "end"
+		
+		while_statement ::= "while" condition "do" statement_list "end"
+		
+		condition ::= logical_expression { logical_operator logical_expression }
+		
+		logical_expression ::= expression | expression relation logical_expression
+		
+		relation ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
+		
+		logical_operator ::= "and" | "or" | "xor"
